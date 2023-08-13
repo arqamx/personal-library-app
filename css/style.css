@@ -1,17 +1,23 @@
-input[type="text"], 
+input[type="text"],
 button {
     width: 100%;
 }
 
-input[type="checkbox"] {
-    transform: scale(1.5);
-  }
-
 .checkbox-container {
     height: 53px;
-  }
+}
 
-  .one {
+.form input[type="checkbox"] {
+    transform: scale(1.5);
+}
+
+#booksContainer .four,
+#booksContainer .one {
+    height: 36px;
+    margin-top: 8px;
+}
+
+.one {
     display: flex;
     justify-content: center;
-  }
+}
