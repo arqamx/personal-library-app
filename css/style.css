@@ -9,6 +9,9 @@ input[type="checkbox"] {
 
 .checkbox-container {
     height: 53px;
+  }
+
+  .one {
     display: flex;
     justify-content: center;
   }
