@@ -6,7 +6,7 @@ The clean and beautiful layout is thanks to [Skeleton](http://getskeleton.com/)
 
 ## Requirements
 
-- A _render()_ function that loops through the array and displays each book on the page
+- On page load add the book to the page.
 - A form that allows user to add new books
 - A delete button.
 - A checkbox to handle the read status of the book
