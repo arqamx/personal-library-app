@@ -1,0 +1,14 @@
+input[type="text"], 
+button {
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+  }
+
+.checkbox-container {
+    height: 53px;
+    display: flex;
+    justify-content: center;
+  }
