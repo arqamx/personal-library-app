@@ -99,3 +99,35 @@ function deleteBookFromPage(e) {
     const divToDel = e.target.parentNode.parentNode;
     divToDel.remove();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btnAdd = document.getElementById('btnAdd');
+    btnAdd.addEventListener('click', function() {
+        buttonPressAdd();
+    });
+});
+
+function buttonPressAdd(){
+    const bookName = document.getElementById('book').value;
+    const authorName = document.getElementById('author').value;
+    const isRead = document.getElementById('readStatus').checked;
+
+    if(bookName !== '') {
+        const newBook = new Book(bookName, authorName, isRead);
+        library.push(newBook);
+        addBookToPage(newBook);
+        clearForm();
+    }
+}
+
+function Book(name, author, read) {
+    this.name = name;
+    this.author = author;
+    this.read = read;
+}
+
+function clearForm() {
+    document.getElementById('book').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('readStatus').checked = false;
+}
