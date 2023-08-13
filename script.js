@@ -19,11 +19,12 @@ const DEFAULT_DATA = [
 ];
 
 window.onload = function () {
-    let localStorageData = getLocalData();
-    if (localStorageData) {
-        library = JSON.parse(localStorageData);
+    let localStorageLibrary = getLocalData();
+    if (localStorageLibrary) {
+        library = JSON.parse(localStorageLibrary);
     } else {
         library = DEFAULT_DATA;
+        updateLocalStorage();
     }
 
     addAllBooksToPage(library);
@@ -33,9 +34,13 @@ function getLocalData() {
     return localStorage.getItem('localLibrary');
 }
 
+function updateLocalStorage() {
+    localStorage.setItem('localLibrary', JSON.stringify(library));
+}
+
 function addAllBooksToPage(books) {
-    books.reverse();
-    for (const book of books) {
+    reversedbooks = books.slice().reverse();
+    for (const book of reversedbooks) {
         addBookToPage(book);
     }
 }
@@ -91,12 +96,13 @@ function readStatusChange(e) {
     const bookTitle = e.target.parentNode.parentNode.childNodes[0].innerText;
     const bookIndex = library.findIndex(book => book.name === bookTitle);
     library[bookIndex].read = isChecked;
-    console.log(library[bookIndex]);
+    updateLocalStorage();
 }
 
 function buttonPressDelete(e) {
     const bookTitle = e.target.parentNode.parentNode.childNodes[0].innerText;
     deleteBookFromLibrary(bookTitle);
+    updateLocalStorage();
     deleteBookFromPage(e);
 }
 
@@ -125,7 +131,8 @@ function buttonPressAdd() {
 
     if (bookName !== '') {
         const newBook = new Book(bookName, authorName, isRead);
-        library.push(newBook);
+        library.unshift(newBook);
+        updateLocalStorage();
         addBookToPage(newBook);
         clearForm();
     }
