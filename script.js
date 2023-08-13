@@ -5,7 +5,17 @@ const DEFAULT_DATA = [
     { name: "Alice in Wonderland", author: "Lewis Caroll", read: false },
     { name: "Naruto", author: "Masashi Kishimoto", read: true },
     { name: "Harry Potter and the Sorcerer's Stone", author: "J.K. Rowling", read: false },
-    { name: "To Kill a Mockingbird", author: "Harper Lee", read: true }
+    { name: "To Kill a Mockingbird", author: "Harper Lee", read: true },
+    { name: "The Great Gatsby", author: "F. Scott Fitzgerald", read: true },
+    { name: "1984", author: "George Orwell", read: true },
+    { name: "Pride and Prejudice", author: "Jane Austen", read: false },
+    { name: "The Catcher in the Rye", author: "J.D. Salinger", read: false },
+    { name: "Moby-Dick", author: "Herman Melville", read: true },
+    { name: "Brave New World", author: "Aldous Huxley", read: true },
+    { name: "The Hobbit", author: "J.R.R. Tolkien", read: true },
+    { name: "The Da Vinci Code", author: "Dan Brown", read: false },
+    { name: "The Chronicles of Narnia", author: "C.S. Lewis", read: true },
+    { name: "One Hundred Years of Solitude", author: "Gabriel García Márquez", read: true }
 ];
 
 window.onload = function () {
@@ -62,10 +72,30 @@ function addBookToPage(book) {
     const button = document.createElement('button');
     button.type = 'button';
     button.textContent = 'Delete';
+    button.addEventListener("click", function(event) {
+        buttonPressDelete(event);
+    });
     col4Div.appendChild(button);
     rowDiv.appendChild(col4Div);
 
     // Append the rowDiv to the #container element as the first child
     const $booksContainerDiv = document.getElementById('booksContainer');
     $booksContainerDiv.insertBefore(rowDiv, $booksContainerDiv.firstChild);
+}
+
+function buttonPressDelete(e) {
+    const bookTitle = e.target.parentNode.parentNode.childNodes[0].innerText;
+    deleteBookFromLibrary(bookTitle);
+    deleteBookFromPage(e);
+}
+
+function deleteBookFromLibrary(bookTitle) {
+    const bookIndex =  library.findIndex(book => book.name === bookTitle);
+    library.splice(bookIndex, 1);
+    console.log(library)
+}
+
+function deleteBookFromPage(e) {
+    const divToDel = e.target.parentNode.parentNode;
+    divToDel.remove();
 }
