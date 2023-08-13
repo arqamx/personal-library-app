@@ -63,6 +63,9 @@ function addBookToPage(book) {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = book.read;
+    checkbox.addEventListener('change', function (event) {
+        readStatusChange(event);
+    });
     col3Div.appendChild(checkbox);
     rowDiv.appendChild(col3Div);
 
@@ -72,7 +75,7 @@ function addBookToPage(book) {
     const button = document.createElement('button');
     button.type = 'button';
     button.textContent = 'Delete';
-    button.addEventListener("click", function(event) {
+    button.addEventListener("click", function (event) {
         buttonPressDelete(event);
     });
     col4Div.appendChild(button);
@@ -83,6 +86,14 @@ function addBookToPage(book) {
     $booksContainerDiv.insertBefore(rowDiv, $booksContainerDiv.firstChild);
 }
 
+function readStatusChange(e) {
+    const isChecked = e.target.checked;
+    const bookTitle = e.target.parentNode.parentNode.childNodes[0].innerText;
+    const bookIndex = library.findIndex(book => book.name === bookTitle);
+    library[bookIndex].read = isChecked;
+    console.log(library[bookIndex]);
+}
+
 function buttonPressDelete(e) {
     const bookTitle = e.target.parentNode.parentNode.childNodes[0].innerText;
     deleteBookFromLibrary(bookTitle);
@@ -90,7 +101,7 @@ function buttonPressDelete(e) {
 }
 
 function deleteBookFromLibrary(bookTitle) {
-    const bookIndex =  library.findIndex(book => book.name === bookTitle);
+    const bookIndex = library.findIndex(book => book.name === bookTitle);
     library.splice(bookIndex, 1);
     console.log(library)
 }
@@ -100,19 +111,19 @@ function deleteBookFromPage(e) {
     divToDel.remove();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const btnAdd = document.getElementById('btnAdd');
-    btnAdd.addEventListener('click', function() {
+    btnAdd.addEventListener('click', function () {
         buttonPressAdd();
     });
 });
 
-function buttonPressAdd(){
+function buttonPressAdd() {
     const bookName = document.getElementById('book').value;
     const authorName = document.getElementById('author').value;
     const isRead = document.getElementById('readStatus').checked;
 
-    if(bookName !== '') {
+    if (bookName !== '') {
         const newBook = new Book(bookName, authorName, isRead);
         library.push(newBook);
         addBookToPage(newBook);
