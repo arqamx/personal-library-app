@@ -1,8 +1,13 @@
-# personalLibraryApp
+# Personal Library App
 
-A library app following I made practice the object constructors.
+An Interactive & Responsive Personal Library App. To keep the record of a Personal reading list. 
 
-The clean and beautiful layout is thanks to [Skeleton](http://getskeleton.com/)
+In which users can add, delete & mark as read/unread books.
+
+Built using JS Functions & Objects, Browser Local Storage. 
+
+Designed using [Skeleton](http://getskeleton.com/) Framework
+
 
 ## Requirements
 
